@@ -1,7 +1,6 @@
 package com.lsy.common.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +12,9 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "bz_selection")
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Selection extends AbstractAuditingEntity {
 
 //    private static final long serialVersionUID = 1L;
@@ -21,7 +23,7 @@ public class Selection extends AbstractAuditingEntity {
 	private Long problemId;
 
 	@Column(nullable = false)
-	private boolean correct = false;
+	private Boolean correct;
 
 	@NotBlank
 	private String content;

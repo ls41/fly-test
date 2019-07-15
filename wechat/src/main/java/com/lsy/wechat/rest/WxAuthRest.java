@@ -7,7 +7,6 @@ import com.lsy.common.domain.wx.WeChatUser;
 import com.lsy.common.service.WeChatUserService;
 import com.lsy.wechat.domain.UserToken;
 import com.lsy.wechat.service.UserTokenManager;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +20,6 @@ import java.util.Optional;
  */
 @RestController
 @RequestMapping("/wx/auth")
-@Validated
 public class WxAuthRest {
 
 	private final WxMaService wxMaService;

@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Service class for managing users.
  */
@@ -16,24 +18,33 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class ProblemService extends AbstractService<Problem> {
 
-    private final Logger log = LoggerFactory.getLogger(ProblemService.class);
+	private final Logger log = LoggerFactory.getLogger(ProblemService.class);
 
-    private final ProblemRepository problemRepository;
-
-
-    public ProblemService(ProblemRepository problemRepository) {
-        this.problemRepository = problemRepository;
-    }
+	private final ProblemRepository problemRepository;
 
 
-    @Override
-    public JpaRepository<Problem, Long> getRepository() {
-        return this.problemRepository;
-    }
+	public ProblemService(ProblemRepository problemRepository) {
+		this.problemRepository = problemRepository;
+	}
 
-    @Override
-    public JpaSpecificationExecutor<Problem> getExecutor() {
-        return problemRepository;
-    }
+
+	@Override
+	public JpaRepository<Problem, Long> getRepository() {
+		return this.problemRepository;
+	}
+
+	@Override
+	public JpaSpecificationExecutor<Problem> getExecutor() {
+		return problemRepository;
+	}
+
+	public List<Problem> findByChapterId(Long id) {
+//		return this.getExecutor().findAll((root, query, criteriaBuilder) ->
+//				query.where(criteriaBuilder.equal(root.get("chapterId").as(Long.class),id)).getRestriction()
+//				);
+		return this.findByExample(Problem.builder().chapterId(id).build());
+	}
+
+
 
 }

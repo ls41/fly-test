@@ -1,13 +1,22 @@
 package com.lsy.common.domain;
 
+import lombok.*;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "bz_chapter")
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Chapter extends AbstractAuditingEntity {
 
 //    private static final long serialVersionUID = 1L;
@@ -23,35 +32,7 @@ public class Chapter extends AbstractAuditingEntity {
     @NotNull
     private Integer sort;
 
-    public Long getBookId() {
-        return bookId;
-    }
+    @Transient
+    private List<Problem> problems;
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public void setIntro(String intro) {
-        this.intro = intro;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
 }

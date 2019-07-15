@@ -33,3 +33,18 @@ spring:
 
 server:
   port: 8087
+
+wechat:
+  app-id: wx310d6a55f28f03c7
+  app-secret: b616119219eceb266a40902986a14e41
+  mch-id: 111111
+  mch-key: xxxxxx
+  notify-url: http://www.example.com/wx/order/pay-notify
+  # 商户证书文件路径
+  # 请参考“商户证书”一节 https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=4_3
+  key-path: xxxxx
+  map-key: U3HBZ-AK6HR-4JOWL-WRAYT-AJ7VS-MQFSJ
+guava:
+  cache:
+    config:
+      expire-after-access-duration=1000

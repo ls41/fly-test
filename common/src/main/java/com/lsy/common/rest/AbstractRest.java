@@ -21,7 +21,7 @@ public abstract class AbstractRest<T extends AbstractAuditingEntity> {
     }
 
     public List<T> find(T t) {
-        return this.getService().find(t);
+        return this.getService().findByExample(t);
     }
 
     public abstract T findById(Long id);
