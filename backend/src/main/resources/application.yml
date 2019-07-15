@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: backend
+#  profiles:
+#    active: #spring.profiles.active#
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: MYSQL
+    show-sql: false
+    open-in-view: false
+    properties:
+      hibernate.jdbc.time_zone: UTC
+    hibernate:
+      ddl-auto: update
+#      naming:
+#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+#        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  jackson:
+    #参数意义：
+    #JsonInclude.Include.ALWAYS              默认
+    #JsonInclude.Include.NON_DEFAULT     属性为默认值不序列化
+    #JsonInclude.Include.NON_EMPTY         属性为 空（””） 或者为 NULL 都不序列化
+    #JsonInclude.Include.NON_NULL           属性为NULL   不序列化
+    default-property-inclusion: ALWAYS
+#    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+server:
+  port: 8086

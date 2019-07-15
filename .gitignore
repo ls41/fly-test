@@ -1,0 +1,13 @@
+/.idea
+*.iml
+/*.iml
+/*/target
+/*/*.iml
+*.log
+log/
+/target/
+/vscode/
+.classpath
+*.eclipse.*
+.project
+.factorypath
