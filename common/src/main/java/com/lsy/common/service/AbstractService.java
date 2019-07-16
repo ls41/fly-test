@@ -39,6 +39,7 @@ public abstract class AbstractService<T extends AbstractAuditingEntity> {
 								));
 						continue;
 					}
+					//因为这里，要求所有的实体Entity字段都是包装类型不能是原始类型
 					if (f.getType().equals(Boolean.class) && f.get(t) == null) {
 						predicates.add(
 								criteriaBuilder.or(
