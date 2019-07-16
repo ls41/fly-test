@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Service class for managing usrs.
@@ -28,14 +27,16 @@ public class ErrorRecordService extends AbstractService<ErrorRecord> {
 	}
 
 	public ErrorRecord saveOrUpdate(ErrorRecord record) {
-		if (record.getId() == null)
-			return this.errorRecordRepository.save(record);
-		Optional<ErrorRecord> storage = errorRecordRepository.findById(record.getId());
-		if (storage.isPresent()) {
-			record.setNum(storage.get().getNum() + 1);
-			record.setProblemId(storage.get().getProblemId());
-			this.errorRecordRepository.deleteById(record.getId());
-			return this.errorRecordRepository.save(record);
+		List<ErrorRecord> storage = this.findByExample(ErrorRecord.builder().weChatUserId(record.getWeChatUserId()).problemId(record.getProblemId()).build());
+		if (storage.size() == 0) {
+			record.setNum(1);
+			return errorRecordRepository.save(record);
+		}
+		if (storage.size() == 1) {
+			storage.get(0).setNum(storage.get(0).getNum() + 1);
+			storage.get(0).setSelectionId(record.getSelectionId());
+			storage.get(0).setContent(record.getContent());
+			return errorRecordRepository.save(storage.get(0));
 		}
 		throw new RuntimeException();
 	}
@@ -43,18 +44,18 @@ public class ErrorRecordService extends AbstractService<ErrorRecord> {
 	public List<ErrorRecord> saveOrUpdate(List<ErrorRecord> records) {
 		List<ErrorRecord> toSave = new ArrayList<>();
 		records.parallelStream().forEach(record -> {
-			if (record.getId() == null) {
+			List<ErrorRecord> storage = this.findByExample(ErrorRecord.builder().weChatUserId(record.getWeChatUserId()).problemId(record.getProblemId()).build());
+			if (storage.size() == 0) {
+				record.setNum(1);
 				toSave.add(record);
-			} else {
-				Optional<ErrorRecord> storage = errorRecordRepository.findById(record.getId());
-				if (storage.isPresent()) {
-					record.setNum(storage.get().getNum() + 1);
-					record.setProblemId(storage.get().getProblemId());
-					this.errorRecordRepository.deleteById(record.getId());
-					toSave.add(record);
-				}
-				throw new RuntimeException();
 			}
+			if (storage.size() == 1) {
+				record.setNum(storage.get(0).getNum() + 1);
+				errorRecordRepository.deleteById(storage.get(0).getId());
+				toSave.add(record);
+			}
+			if (storage.size() > 1)
+				throw new RuntimeException();
 		});
 		return this.errorRecordRepository.saveAll(toSave);
 

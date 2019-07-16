@@ -1,10 +1,9 @@
 package com.lsy.common.domain.wx;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lsy.common.domain.AbstractAuditingEntity;
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -15,6 +14,8 @@ import javax.validation.constraints.NotNull;
 @Table(name = "wx_error_record")
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ErrorRecord extends AbstractAuditingEntity {
 	@NotNull
 	private Long problemId;
@@ -26,6 +27,15 @@ public class ErrorRecord extends AbstractAuditingEntity {
 	private Long selectionId;
 
 	private String content;
+
+	public Integer getNum() {
+		return num;
+	}
+
+	@JsonIgnore
+	public void setNum(Integer num) {
+		this.num = num;
+	}
 
 	private Integer num;
 

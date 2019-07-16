@@ -1,6 +1,7 @@
 package com.lsy.wechat.config;
 
 import com.lsy.wechat.service.UserTokenManager;
+import org.apache.http.client.HttpResponseException;
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -22,11 +23,13 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
 
 		String token = request.getHeader(LOGIN_TOKEN_KEY);
 		if (token == null || token.isEmpty()) {
-			return null;
+			throw new HttpResponseException(500, "TOKEN为空");
 		}
-
+		Long rtn = UserTokenManager.testGetUserId(token);
+		if (rtn == null)
+			throw new HttpResponseException(500, "TOKEN无效");
 //		return UserTokenManager.getUserId(token);
 
-		return UserTokenManager.testGetUserId(token);
+		return rtn;
 	}
 }
