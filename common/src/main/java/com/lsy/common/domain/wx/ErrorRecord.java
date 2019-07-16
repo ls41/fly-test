@@ -2,6 +2,7 @@ package com.lsy.common.domain.wx;
 
 
 import com.lsy.common.domain.AbstractAuditingEntity;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -13,6 +14,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "wx_error_record")
 @Data
+@Builder
 public class ErrorRecord extends AbstractAuditingEntity {
 	@NotNull
 	private Long problemId;

@@ -78,6 +78,10 @@ public abstract class AbstractService<T extends AbstractAuditingEntity> {
 		this.getRepository().delete(t);
 	}
 
+	public void deleteById(Long id) {
+		this.getRepository().deleteById(id);
+	}
+
 	//多条件查询
 	public List<T> findByExample(T t) {
 		return this.getExecutor().findAll(getSpecification(t));
