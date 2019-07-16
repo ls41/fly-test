@@ -33,6 +33,13 @@ public class WxAuthRest {
 
 	@PostMapping("login")
 	public Object loginByWeChat(@RequestBody @NotNull WeChatUser weChatUser, HttpServletRequest request) {
+
+
+
+
+
+
+
 		String sessionKey = null;
 		String openId = null;
 		try {
