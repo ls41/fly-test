@@ -11,7 +11,7 @@
  Target Server Version : 80016
  File Encoding         : 65001
 
- Date: 16/07/2019 12:01:33
+ Date: 16/07/2019 16:43:14
 */
 
 SET NAMES utf8mb4;
@@ -34,9 +34,9 @@ CREATE TABLE `bz_book`  (
 -- ----------------------------
 -- Records of bz_book
 -- ----------------------------
-INSERT INTO `bz_book` VALUES (2, '2019-07-13 12:04:58', '2019-07-13 12:04:58', '课程一', '课程一', 11);
-INSERT INTO `bz_book` VALUES (3, '2019-07-13 12:11:39', '2019-07-13 12:11:39', '课程2', '课程2', 10);
-INSERT INTO `bz_book` VALUES (4, '2019-07-14 03:36:04', '2019-07-14 03:36:04', '课程3', '课程3', 12);
+INSERT INTO `bz_book` VALUES (0, '2019-07-13 12:04:58', '2019-07-13 12:04:58', '课程一', '课程一', 11);
+INSERT INTO `bz_book` VALUES (1, '2019-07-13 12:11:39', '2019-07-13 12:11:39', '课程2', '课程2', 10);
+INSERT INTO `bz_book` VALUES (2, '2019-07-14 03:36:04', '2019-07-14 03:36:04', '课程3', '课程3', 12);
 
 -- ----------------------------
 -- Table structure for bz_chapter
@@ -56,7 +56,7 @@ CREATE TABLE `bz_chapter`  (
 -- ----------------------------
 -- Records of bz_chapter
 -- ----------------------------
-INSERT INTO `bz_chapter` VALUES (1, '2019-07-15 16:29:07', '2019-07-15 16:29:13', 2, '第一章、飞机概述、应急设备、门、窗', '第一章、飞机概述、应急设备、门、窗', 0);
+INSERT INTO `bz_chapter` VALUES (0, '2019-07-15 16:29:07', '2019-07-15 16:29:13', 0, '第一章、飞机概述、应急设备、门、窗', '第一章、飞机概述、应急设备、门、窗', 0);
 
 -- ----------------------------
 -- Table structure for bz_problem
@@ -76,12 +76,12 @@ CREATE TABLE `bz_problem`  (
 -- ----------------------------
 -- Records of bz_problem
 -- ----------------------------
-INSERT INTO `bz_problem` VALUES (1, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 1, '关于紧急出口灯开关的位置，下列哪一种说法是正确的？', 0, 1);
-INSERT INTO `bz_problem` VALUES (2, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 1, '在捏紧和拉下时，氧气面罩释放手杆：', 1, 1);
-INSERT INTO `bz_problem` VALUES (3, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 1, '供水系统的控制:', 2, 1);
-INSERT INTO `bz_problem` VALUES (4, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 1, '在驾驶舱的什么地方显示机组人员的氧气压力？', 3, 1);
-INSERT INTO `bz_problem` VALUES (5, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 1, '位于多少座舱高度时，乘客氧气系统会自动启动？', 4, 1);
-INSERT INTO `bz_problem` VALUES (6, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 1, '琥珀色的PASS OXY ON（乘客氧气开灯）指示灯亮起，这说明什么？', 5, 1);
+INSERT INTO `bz_problem` VALUES (1, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 0, '关于紧急出口灯开关的位置，下列哪一种说法是正确的？', 0, 0);
+INSERT INTO `bz_problem` VALUES (2, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 0, '在捏紧和拉下时，氧气面罩释放手杆：', 1, 0);
+INSERT INTO `bz_problem` VALUES (3, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 0, '供水系统的控制:', 2, 0);
+INSERT INTO `bz_problem` VALUES (4, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 0, '在驾驶舱的什么地方显示机组人员的氧气压力？', 3, 0);
+INSERT INTO `bz_problem` VALUES (5, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 0, '位于多少座舱高度时，乘客氧气系统会自动启动？', 4, 0);
+INSERT INTO `bz_problem` VALUES (6, '2019-07-15 16:29:55', '2019-07-15 16:30:01', 0, '琥珀色的PASS OXY ON（乘客氧气开灯）指示灯亮起，这说明什么？', 5, 0);
 
 -- ----------------------------
 -- Table structure for bz_selection
@@ -142,6 +142,12 @@ CREATE TABLE `wx_error_record`  (
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Records of wx_error_record
+-- ----------------------------
+INSERT INTO `wx_error_record` VALUES (16, '2019-07-16 08:29:31', '2019-07-16 08:29:31', 'contentss**asd*****s', 4, 1, 1, 1);
+INSERT INTO `wx_error_record` VALUES (15, '2019-07-16 08:14:37', '2019-07-16 08:14:37', 'contentss**asd*****s', 34, 1, 1, 0);
+
+-- ----------------------------
 -- Table structure for wx_user
 -- ----------------------------
 DROP TABLE IF EXISTS `wx_user`;
@@ -160,5 +166,12 @@ CREATE TABLE `wx_user`  (
   `province` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = MyISAM AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of wx_user
+-- ----------------------------
+INSERT INTO `wx_user` VALUES (1, '2019-07-16 15:08:51', '2019-07-16 15:08:54', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif', NULL, NULL, NULL, 1, NULL, NULL, 'ozZC15Axhfcc8YoIg9XbcUl43OV0', NULL);
+INSERT INTO `wx_user` VALUES (0, '2019-07-16 15:08:51', '2019-07-16 15:08:54', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif', NULL, NULL, NULL, 1, NULL, NULL, 'ozZC15Axhfcc8YoIg9XbcUl43OV0', NULL);
+INSERT INTO `wx_user` VALUES (2, '2019-07-16 15:08:51', '2019-07-16 15:08:54', 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif', NULL, NULL, NULL, 1, NULL, NULL, 'ozZC15Axhfcc8YoIg9XbcUl43OV0', NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
