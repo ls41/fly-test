@@ -2,8 +2,7 @@ package com.lsy.common.service;
 
 import com.lsy.common.domain.Problem;
 import com.lsy.common.repository.ProblemRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
@@ -17,9 +16,8 @@ import java.util.List;
  */
 @Service
 @Transactional
+@Slf4j
 public class ProblemService extends AbstractService<Problem> {
-
-	private final Logger log = LoggerFactory.getLogger(ProblemService.class);
 
 	private final ProblemRepository problemRepository;
 

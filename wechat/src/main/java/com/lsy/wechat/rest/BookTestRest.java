@@ -47,8 +47,4 @@ public class BookTestRest {
 		return rtn;
 	}
 
-	@GetMapping("/index")
-	public List<Chapter> findByBookId(@RequestParam @NotNull Long bookId) {
-		return this.chapterService.findByExample(Chapter.builder().bookId(bookId).build());
-	}
 }
