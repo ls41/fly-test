@@ -1,8 +1,7 @@
 package com.lsy.common.domain.wx;
 
 import com.lsy.common.domain.AbstractAuditingEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -11,6 +10,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "wx_user")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class WeChatUser extends AbstractAuditingEntity {
 	private String code;
 	private String nickName;

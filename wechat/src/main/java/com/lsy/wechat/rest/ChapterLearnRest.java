@@ -33,7 +33,7 @@ public class ChapterLearnRest {
 		Chapter storage = this.chapterService.findById(chapterId);
 		List<Problem> problems = problemService.findByChapterId(chapterId);
 		//TODO add cache
-		problems.stream().parallel().forEach(problem ->
+		problems.parallelStream().forEach(problem ->
 				problem.setSelections(
 						selectionService.findByExample(Selection.builder().problemId(problem.getId()).build())
 				)

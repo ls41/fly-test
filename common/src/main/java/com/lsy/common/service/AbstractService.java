@@ -93,7 +93,7 @@ public abstract class AbstractService<T extends AbstractAuditingEntity> {
 	}
 
 	//首字母大写
-	public String captureName(String name) {
+	private String captureName(String name) {
 		char[] cs = name.toCharArray();
 		cs[0] -= 32;
 		return String.valueOf(cs);

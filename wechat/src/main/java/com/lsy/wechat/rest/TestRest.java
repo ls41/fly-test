@@ -20,13 +20,13 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("wx/test")
-public class BookTestRest {
+public class TestRest {
 
 	private final ChapterService chapterService;
 	private final ProblemService problemService;
 	private final SelectionService selectionService;
 
-	public BookTestRest(ChapterService chapterService, ProblemService problemService, SelectionService selectionService) {
+	public TestRest(ChapterService chapterService, ProblemService problemService, SelectionService selectionService) {
 		this.chapterService = chapterService;
 		this.problemService = problemService;
 		this.selectionService = selectionService;
@@ -34,7 +34,7 @@ public class BookTestRest {
 
 
 	@GetMapping
-	public List<Problem> learn(@RequestParam @NotNull Long bookId) {
+	public List<Problem> test(@RequestParam @NotNull Long bookId) {
 		List<Problem> storage = problemService.findByChapterIdIn(chapterService.findByExample(Chapter.builder().bookId(bookId).build()).stream().map(Chapter::getId).collect(Collectors.toList()));
 		Set<Integer> set = TestRandomUtil.get(3, storage.size());
 		List<Problem> rtn = new ArrayList<>();
