@@ -21,6 +21,9 @@ public class Problem extends AbstractAuditingEntity {
 
 //    private static final long serialVersionUID = 1L;
     @NotNull
+    private Long bookId;
+
+    @NotNull
     private Long chapterId;
 
     @NotNull

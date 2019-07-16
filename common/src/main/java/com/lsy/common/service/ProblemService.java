@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 /**
@@ -39,12 +40,18 @@ public class ProblemService extends AbstractService<Problem> {
 	}
 
 	public List<Problem> findByChapterId(Long id) {
-//		return this.getExecutor().findAll((root, query, criteriaBuilder) ->
-//				query.where(criteriaBuilder.equal(root.get("chapterId").as(Long.class),id)).getRestriction()
-//				);
 		return this.findByExample(Problem.builder().chapterId(id).build());
 	}
 
+	public List<Problem> findByChapterIdIn(List<Long> ids) {
+		return this.getExecutor().findAll((root, query, criteriaBuilder) -> {
+					CriteriaBuilder.In<Long> in = criteriaBuilder.in(root.get("chapterId"));
+					ids.forEach(in::value);
+					return query.where(in).getRestriction();
+				}
+		);
+
+	}
 
 
 }
