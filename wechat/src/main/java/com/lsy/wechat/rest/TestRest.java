@@ -36,7 +36,7 @@ public class TestRest {
 	@GetMapping
 	public List<Problem> test(@RequestParam @NotNull Long bookId) {
 		List<Problem> storage = problemService.findByChapterIdIn(chapterService.findByExample(Chapter.builder().bookId(bookId).build()).stream().map(Chapter::getId).collect(Collectors.toList()));
-		Set<Integer> set = TestRandomUtil.get(3, storage.size());
+		Set<Integer> set = TestRandomUtil.get(100, storage.size());
 		List<Problem> rtn = new ArrayList<>();
 		set.forEach(integer -> {
 			storage.get(integer).setSelections(
