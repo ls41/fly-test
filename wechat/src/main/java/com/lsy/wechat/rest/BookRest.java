@@ -8,7 +8,6 @@ import com.lsy.common.service.BookService;
 import com.lsy.common.service.ChapterService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Min;
 import java.util.List;
 
 @RestController
@@ -23,11 +22,17 @@ public class BookRest extends AbstractRest<Book> {
 	}
 
 	@Override
-	@GetMapping("find")
-	public Book findById(@RequestParam @Min(0) Long id) {
+	@GetMapping("/find")
+	public Book findById(@RequestParam Long id) {
 		Book rtn = bookService.findById(id);
 		rtn.setChapters(chapterService.findByExample(Chapter.builder().bookId(id).build()));
 		return rtn;
+	}
+
+
+	@GetMapping("/learnEntire")
+	public Book learnEntire(@RequestParam Long id) {
+		return this.bookService.findByIdWithChapters(id);
 	}
 
 	@PostMapping("/list")

@@ -16,22 +16,31 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 public class BookService extends AbstractService<Book> {
 
-    private final BookRepository bookRepository;
+	private final BookRepository bookRepository;
+
+	private final ChapterService chapterService;
 
 
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+	public BookService(BookRepository bookRepository, ChapterService chapterService) {
+		this.bookRepository = bookRepository;
+		this.chapterService = chapterService;
+	}
+
+	public Book findByIdWithChapters(Long id) {
+		Book storage = this.bookRepository.findById(id).orElseThrow(RuntimeException::new);
+		storage.setChapters(this.chapterService.findByBookId(storage.getId()));
+		return storage;
+	}
 
 
-    @Override
-    public JpaRepository<Book, Long> getRepository() {
-        return this.bookRepository;
-    }
+	@Override
+	public JpaRepository<Book, Long> getRepository() {
+		return this.bookRepository;
+	}
 
-    @Override
-    public JpaSpecificationExecutor<Book> getExecutor() {
-        return bookRepository;
-    }
+	@Override
+	public JpaSpecificationExecutor<Book> getExecutor() {
+		return bookRepository;
+	}
 
 }

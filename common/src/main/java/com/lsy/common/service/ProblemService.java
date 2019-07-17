@@ -21,9 +21,11 @@ public class ProblemService extends AbstractService<Problem> {
 
 	private final ProblemRepository problemRepository;
 
+	private final SelectionService selectionService;
 
-	public ProblemService(ProblemRepository problemRepository) {
+	public ProblemService(ProblemRepository problemRepository, SelectionService selectionService) {
 		this.problemRepository = problemRepository;
+		this.selectionService = selectionService;
 	}
 
 
@@ -38,7 +40,9 @@ public class ProblemService extends AbstractService<Problem> {
 	}
 
 	public List<Problem> findByChapterId(Long id) {
-		return this.findByExample(Problem.builder().chapterId(id).build());
+		List<Problem> storageList = this.findByExample(Problem.builder().chapterId(id).build());
+		storageList.parallelStream().forEach(problem -> problem.setSelections(selectionService.findByProblemId(problem.getId())));
+		return storageList;
 	}
 
 	public List<Problem> findByChapterIdIn(List<Long> ids) {
