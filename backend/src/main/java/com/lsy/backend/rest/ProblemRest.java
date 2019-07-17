@@ -12,30 +12,35 @@ import java.util.List;
 @RestController
 @RequestMapping("admin/problem")
 public class ProblemRest extends AbstractRest<Problem> {
-    private final ProblemService problemService;
+	private final ProblemService problemService;
 
-    public ProblemRest(ProblemService problemService) {
-        this.problemService = problemService;
-    }
+	public ProblemRest(ProblemService problemService) {
+		this.problemService = problemService;
+	}
 
-    @PostMapping("/create")
-    public Problem create(@RequestBody Problem problem) {
-        return super.create(problem);
-    }
+	@PostMapping("/create")
+	public Problem create(@RequestBody Problem problem) {
+		return super.create(problem);
+	}
 
-    @PostMapping("/list")
-    public List<Problem> list(@RequestBody Problem problem) {
-        return super.find(problem);
-    }
+	@PostMapping("/createByString")
+	public List<Problem> createByString(@RequestBody String s, Long bookId, Long chapterId) {
+		return problemService.createByString(s, bookId, chapterId);
+	}
 
-    @Override
-    public AbstractService<Problem> getService() {
-        return problemService;
-    }
+	@PostMapping("/list")
+	public List<Problem> list(@RequestBody Problem problem) {
+		return super.find(problem);
+	}
 
-    @Override
-    @GetMapping
-    public Problem findById(@RequestParam @Min(0) Long id) {
-        return problemService.findById(id);
-    }
+	@Override
+	public AbstractService<Problem> getService() {
+		return problemService;
+	}
+
+	@Override
+	@GetMapping
+	public Problem findById(@RequestParam @Min(0) Long id) {
+		return problemService.findById(id);
+	}
 }
