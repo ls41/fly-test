@@ -2,7 +2,7 @@ spring:
   application:
     name: wechat
   profiles:
-    active: db
+    active: tencent-cloud
 
 #  datasource:
 #    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
