@@ -45,3 +45,4 @@ public class BookRest extends AbstractRest<Book> {
 		return bookService;
 	}
 }
+	

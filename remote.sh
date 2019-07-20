@@ -1,0 +1,1 @@
+sudo docker run --rm -d -e MYSQL_ROOT_PASSWORD=1234567890 -v mysqlDatas:/home/ubuntu/mysqlDatas  -p 23333:3306 mysql:latest
