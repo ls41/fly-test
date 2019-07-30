@@ -6,10 +6,10 @@ import com.lsy.common.domain.Selection;
 import com.lsy.common.service.ChapterService;
 import com.lsy.common.service.ProblemService;
 import com.lsy.common.service.SelectionService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.lsy.wechat.config.LoginUser;
+import com.lsy.wechat.domain.dto.LastVisitDto;
+import com.lsy.wechat.service.LearnRecordService;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -21,11 +21,13 @@ public class ChapterLearnRest {
 	private final ChapterService chapterService;
 	private final ProblemService problemService;
 	private final SelectionService selectionService;
+	private final LearnRecordService learnRecordService;
 
-	public ChapterLearnRest(ChapterService chapterService, ProblemService problemService, SelectionService selectionService) {
+	public ChapterLearnRest(ChapterService chapterService, ProblemService problemService, SelectionService selectionService, LearnRecordService learnRecordService) {
 		this.chapterService = chapterService;
 		this.problemService = problemService;
 		this.selectionService = selectionService;
+		this.learnRecordService = learnRecordService;
 	}
 
 	@GetMapping("/learn")
@@ -40,6 +42,18 @@ public class ChapterLearnRest {
 		);
 		storage.setProblems(problems);
 		return storage;
+	}
+
+
+	@PostMapping("/lastVisit")
+	public void createLastVisit(@LoginUser Long userId, Long problemId) {
+		this.learnRecordService.createLastVisitData(userId,problemId);
+	}
+
+
+	@GetMapping("/lastVisit")
+	public LastVisitDto getLastVisit(@LoginUser Long userId) {
+		return this.learnRecordService.getVisitData(userId);
 	}
 
 	@GetMapping("/index")
