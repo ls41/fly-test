@@ -5,12 +5,18 @@ import com.lsy.common.repository.ProblemRepository;
 import com.lsy.common.repository.wx.LearnRecordRepository;
 import com.lsy.common.service.AbstractService;
 import com.lsy.wechat.domain.dto.LastVisitDto;
+import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.crypto.DataLengthException;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Service
+@Slf4j
+@Transactional
 public class LearnRecordService extends AbstractService<LearnRecord> {
 
 	private final LearnRecordRepository learnRecordRepository;
