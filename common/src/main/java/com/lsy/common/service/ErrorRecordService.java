@@ -1,7 +1,7 @@
 package com.lsy.common.service;
 
 import com.lsy.common.domain.wx.ErrorRecord;
-import com.lsy.common.repository.ErrorRecordRepository;
+import com.lsy.common.repository.wx.ErrorRecordRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

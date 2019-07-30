@@ -1,4 +1,4 @@
-package com.lsy.common.repository;
+package com.lsy.common.repository.wx;
 
 import com.lsy.common.domain.wx.ErrorRecord;
 import org.springframework.data.jpa.repository.JpaRepository;

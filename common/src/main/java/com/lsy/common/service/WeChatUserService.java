@@ -1,7 +1,7 @@
 package com.lsy.common.service;
 
 import com.lsy.common.domain.wx.WeChatUser;
-import com.lsy.common.repository.WeChatUserRepository;
+import com.lsy.common.repository.wx.WeChatUserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
