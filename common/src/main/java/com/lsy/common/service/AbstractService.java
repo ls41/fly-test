@@ -92,6 +92,10 @@ public abstract class AbstractService<T extends AbstractAuditingEntity> {
 		return this.getRepository().findById(id).get();
 	}
 
+	public List<T> findAllByIds(List<Long> ids) {
+		return this.getRepository().findAllById(ids);
+	}
+
 	//首字母大写
 	private String captureName(String name) {
 		char[] cs = name.toCharArray();
