@@ -10,6 +10,7 @@ import com.lsy.common.service.ChapterService;
 import com.lsy.common.service.ProblemService;
 import com.lsy.common.service.SelectionService;
 import com.lsy.wechat.config.LoginUser;
+import com.lsy.wechat.domain.dto.TestDto;
 import com.lsy.wechat.domain.dto.TestResultDto;
 import com.lsy.wechat.service.TestRecordService;
 import com.lsy.wechat.utils.TestRandomUtil;
@@ -41,7 +42,7 @@ public class TestRest {
 
 
 	@GetMapping
-	public List<Problem> test(@LoginUser Long userId, @RequestParam @NotNull Long bookId) {
+	public TestDto test(@LoginUser Long userId, @RequestParam @NotNull Long bookId) {
 		List<Problem> storage = problemService.findByChapterIdIn(chapterService.findByExample(Chapter.builder().bookId(bookId).build()).stream().map(Chapter::getId).collect(Collectors.toList()));
 		Set<Integer> set = TestRandomUtil.get(100, storage.size());
 		List<Problem> rtn = new ArrayList<>();
@@ -53,7 +54,10 @@ public class TestRest {
 			rtn.add(storage.get(integer));
 		});
 
-		return rtn;
+		return TestDto.builder()
+				.problems(rtn)
+				.testRecordId(testRecord.getId())
+				.build();
 	}
 
 	@PostMapping("/submit")
