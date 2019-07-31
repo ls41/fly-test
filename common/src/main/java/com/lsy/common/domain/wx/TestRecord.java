@@ -21,4 +21,6 @@ public class TestRecord extends AbstractAuditingEntity {
 	private Short sort;
 
 	private Short score;
+
+	private int timeCost;
 }

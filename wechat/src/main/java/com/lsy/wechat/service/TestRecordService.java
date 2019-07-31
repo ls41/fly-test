@@ -41,11 +41,12 @@ public class TestRecordService extends AbstractService<TestRecord> {
 				.build());
 	}
 
-	public TestRecord findLastOne(Long userId) {
+	public TestRecord getLastedOne(Long userId) {
 		List<TestRecord> testRecords = this.findByExample(TestRecord.builder().weChatUserId(userId).build());
-		if (testRecords.size() == 0)
+		if (testRecords == null || testRecords.size() == 0)
 			throw new RuntimeException();
 		testRecords.sort(Comparator.comparing(AbstractAuditingEntity::getCreatedDate));
 		return testRecords.get(testRecords.size() - 1);
 	}
+
 }

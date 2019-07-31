@@ -12,6 +12,7 @@ import com.lsy.common.service.SelectionService;
 import com.lsy.wechat.config.LoginUser;
 import com.lsy.wechat.domain.dto.TestDto;
 import com.lsy.wechat.domain.dto.TestResultDto;
+import com.lsy.wechat.domain.dto.TestSubmitDto;
 import com.lsy.wechat.service.TestRecordService;
 import com.lsy.wechat.utils.TestRandomUtil;
 import org.springframework.web.bind.annotation.*;
@@ -61,9 +62,12 @@ public class TestRest {
 	}
 
 	@PostMapping("/submit")
-	public TestResultDto submit(@LoginUser Long userId, @RequestBody List<Selection> selections) {
-		TestRecord testRecord = testRecordService.findLastOne(userId);
-		List<Selection> storage = selectionService.findAllByIds(selections.stream().map(Selection::getId).collect(Collectors.toList()));
+	public TestResultDto submit(@LoginUser Long userId, @RequestBody TestSubmitDto testSubmitDto) {
+		TestRecord testRecord = testRecordService.findById(testSubmitDto.getTestRecordId());
+		if (!testRecord.getWeChatUserId().equals(userId))
+			throw new RuntimeException();
+		List<Selection> storage = selectionService.findAllByIds(testSubmitDto.getSelections().stream()
+				.map(Selection::getId).collect(Collectors.toList()));
 		List<TestDetailRecord> toSave = new ArrayList<>();
 		storage.forEach(selection ->
 				toSave.add(TestDetailRecord.builder()
@@ -73,10 +77,18 @@ public class TestRest {
 						.build()));
 		this.testDetailRecordRepository.saveAll(toSave);
 		long correct = storage.stream().filter(Selection::getCorrect).count();
+		testRecord.setScore((short) correct);
+		testRecord.setTimeCost(testSubmitDto.getTimeCost());
+		this.testRecordService.update(testRecord);
 		return TestResultDto.builder()
 				.error(((short) correct))
 				.score((short) (100 - correct))
 				.build();
+	}
+
+	@GetMapping("/last")
+	public TestRecord getLast(@LoginUser Long userId) {
+		return this.testRecordService.getLastedOne(userId);
 	}
 
 }
