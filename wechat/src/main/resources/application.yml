@@ -2,29 +2,29 @@ spring:
   application:
     name: wechat
   profiles:
-#    active: tencent-cloud
+    #    active: tencent-cloud
     active: local-cx
-
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
-#    username: root
-#    password: 123456
-##    url: jdbc:mysql://localhost:23333/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
-##    username: root
-##    password: 1234567890
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#  jpa:
-#    database: MYSQL
-#    show-sql: false
-#    open-in-view: false
-#    properties:
-#      hibernate.jdbc.time_zone: GMT+8
-#    hibernate:
-#      ddl-auto: update
-#      naming:
-#        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
-#        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
-#    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+  #    keytool -genkeypair -alias tomcat -dname "CN=fly,OU=fly,O=fly,L=fly,ST=KunMing,C=CN" -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
+  #  datasource:
+  #    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+  #    username: root
+  #    password: 123456
+  ##    url: jdbc:mysql://localhost:23333/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+  ##    username: root
+  ##    password: 1234567890
+  #    driver-class-name: com.mysql.cj.jdbc.Driver
+  #  jpa:
+  #    database: MYSQL
+  #    show-sql: false
+  #    open-in-view: false
+  #    properties:
+  #      hibernate.jdbc.time_zone: GMT+8
+  #    hibernate:
+  #      ddl-auto: update
+  #      naming:
+  #        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+  #        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+  #    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   jackson:
     #参数意义：
     #JsonInclude.Include.ALWAYS              默认
@@ -37,6 +37,12 @@ spring:
 
 server:
   port: 8087
+  ssl:
+    key-store: classpath:keystore.p12
+    keyStoreType: PKCS12
+    keyAlias: tomcat
+    enabled: true
+    key-store-password: 1234567890
 
 wechat:
   app-id: wx310d6a55f28f03c7
