@@ -3,7 +3,7 @@ spring:
     name: wechat
   profiles:
     #    active: tencent-cloud
-    active: local-cx
+    active: local
   #    keytool -genkeypair -alias tomcat -dname "CN=fly,OU=fly,O=fly,L=fly,ST=KunMing,C=CN" -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
   #  datasource:
   #    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
@@ -45,8 +45,8 @@ server:
     key-store-password: 1234567890
 
 wechat:
-  app-id: wx310d6a55f28f03c7
-  app-secret: b616119219eceb266a40902986a14e41
+  app-id: wxa5d31b433dfe9c5f
+  app-secret: b2947f3f2fac67ef335cab65b6cdac2d
   mch-id: 111111
   mch-key: xxxxxx
   notify-url: http://www.example.com/wx/order/pay-notify

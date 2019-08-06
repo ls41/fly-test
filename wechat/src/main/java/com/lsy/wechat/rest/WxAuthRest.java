@@ -7,6 +7,7 @@ import com.lsy.common.domain.wx.WeChatUser;
 import com.lsy.common.service.WeChatUserService;
 import com.lsy.wechat.domain.UserToken;
 import com.lsy.wechat.service.UserTokenManager;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,14 +33,7 @@ public class WxAuthRest {
 	}
 
 	@PostMapping("login")
-	public Object loginByWeChat(@RequestBody @NotNull WeChatUser weChatUser, HttpServletRequest request) {
-
-
-
-
-
-
-
+	public ResponseEntity loginByWeChat(@RequestBody @NotNull WeChatUser weChatUser) {
 		String sessionKey = null;
 		String openId = null;
 		try {
@@ -70,7 +64,7 @@ public class WxAuthRest {
 		result.put("token", userToken.getToken());
 		result.put("tokenExpire", userToken.getExpireTime().toString());
 		result.put("weChatUser", weChatUser);
-		return request;
+		return ResponseEntity.ok(result);
 	}
 
 
