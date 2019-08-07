@@ -25,7 +25,8 @@ public class LoginUserHandlerMethodArgumentResolver implements HandlerMethodArgu
 		if (token == null || token.isEmpty()) {
 			throw new HttpResponseException(500, "TOKEN为空");
 		}
-		Long rtn = UserTokenManager.testGetUserId(token);
+		Long rtn = UserTokenManager.getUserId(token);
+		rtn = rtn == null ? UserTokenManager.testGetUserId(token) : rtn;
 		if (rtn == null)
 			throw new HttpResponseException(500, "TOKEN无效");
 //		return UserTokenManager.getUserId(token);

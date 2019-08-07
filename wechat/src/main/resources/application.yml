@@ -3,7 +3,7 @@ spring:
     name: wechat
   profiles:
     #    active: tencent-cloud
-    active: local
+    active: local-cx
   #    keytool -genkeypair -alias tomcat -dname "CN=fly,OU=fly,O=fly,L=fly,ST=KunMing,C=CN" -storetype PKCS12 -keyalg RSA -keysize 2048 -keystore keystore.p12 -validity 3650
   #  datasource:
   #    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8

@@ -1,7 +1,6 @@
 spring:
   datasource:
-    #    url: jdbc:mysql://localhost:23333/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
-    url: jdbc:mysql://maybacx.xicp.net:23333/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:23333/test?useUnicode=true&characterEncoding=utf8&useSSL=false&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
     username: root
     password: 1234567890
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,3 +12,5 @@ spring:
       hibernate.jdbc.time_zone: GMT+8
     hibernate:
       ddl-auto: update
+logging:
+  file: ./debug.log
